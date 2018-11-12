@@ -21,6 +21,15 @@ var errorController = {
                 });
             }
         });
+    },
+    getErrorByAnonId:(req, res, next)=>{
+        errorModel.find({anonymous_id:req.query.anonymous_id})
+        .exec((err,errorDocs)=>{
+            if(err) return next(err)
+            else{
+                res.send(errorDocs);
+            }
+        });
     }
 }
 
