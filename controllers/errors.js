@@ -1,7 +1,7 @@
-var errorModel = require('../models/errors');
-var userController = require('./users');
+const errorModel = require('../models/errors');
+const userController = require('./users');
 
-var errorController = {
+const errorController = {
     createError:(req, res, next)=>{
         // console.log(req.body.userParams);
         userController.findUserByAnonId(req.body.userParams, (err, user)=>{

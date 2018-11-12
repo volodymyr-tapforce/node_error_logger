@@ -1,6 +1,6 @@
-var userModel = require('../models/users');
+const userModel = require('../models/users');
 
-var userController = {
+const userController = {
     findUserByAnonId: (userParams, findCallback) => {
         userModel.findOne({
             anonymous_id: userParams.anonymous_id

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var errorController = require('../controllers/errors');
+const errorController = require('../controllers/errors');
 
 router.get('/',errorController.getErrorByAnonId);
 

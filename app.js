@@ -1,19 +1,19 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var errorRouter = require('./routes/errors');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const errorRouter = require('./routes/errors');
 
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
