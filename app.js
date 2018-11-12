@@ -3,6 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
