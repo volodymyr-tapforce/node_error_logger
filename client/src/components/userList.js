@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List } from 'semantic-ui-react';
+import { List, Container } from 'semantic-ui-react';
 import UserListItem from './userListItem';
 import axios from 'axios';
 
@@ -18,9 +18,11 @@ class UserList extends Component {
           return <UserListItem {...user} key={user.anonymous_id}/>      
       });
       return (
+        <Container>
         <List>
             {usersItemArr}
         </List>
+        </Container>
         );
     }
   }

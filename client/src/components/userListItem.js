@@ -1,12 +1,16 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react'
+import '../css/userListItem.css'
 
 function UserListItem(props) {
     return   <List.Item>
-                <Image avatar src='/images/user.png' />
-                <b>anonymous_id:</b>{props.anonymous_id} <b>user_id:</b>{props.user_id} 
-                <b>email:</b>{props.email} <b>created_at:</b> {props.created_at}
-                <hr/>
+                <div className="user-list-item">
+                    <div><Image avatar src='/images/user.png'/></div>
+                    <div><b>anonymous_id:</b>{props.anonymous_id}</div>
+                    <div><b>user_id:</b>{props.user_id}</div>
+                    <div><b>email:</b>{props.email}</div>
+                    <div><b>created_at:</b>{props.created_at}</div>
+                </div>
             </List.Item>
 }
 
