@@ -23,6 +23,18 @@ var userController = {
     },
     updateUser:(userParams)=>{
 
+    }, 
+    getUsers:(req, res, next)=>{
+        let skip = req.query.page || 0;
+        skip*=10;
+        const limit = req.query.limit||10;
+        userModel.find()
+        .skip(skip)
+        .limit(limit)
+        .exec((err, users)=>{
+            if(err) return next(err);
+            else res.send(users);
+        });
     }
 }
 
