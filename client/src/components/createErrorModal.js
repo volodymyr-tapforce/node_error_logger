@@ -5,7 +5,7 @@ import ErrorForm from './errorCreateForm';
 class ErrorModal extends Component {
     render() {
       return (
-        <Modal trigger={<Button>Show Modal</Button>} size={'tiny'}>
+        <Modal trigger={<Button>Create Error</Button>} size={'tiny'}>
         <Modal.Content image>
             <ErrorForm></ErrorForm>
         </Modal.Content>
