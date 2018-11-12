@@ -6,4 +6,4 @@ var errorSchema = new mongoose.Schema({
   err_message: {type:String, required:true},
 });
 
-module.exports = mongoose.model('Error', userSchema);
+module.exports = mongoose.model('Error', errorSchema);
