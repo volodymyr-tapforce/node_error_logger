@@ -3,8 +3,12 @@ var userController = require('./users');
 
 var errorController = {
     createError:(req, res, next)=>{
+        // console.log(req.body.userParams);
+        userController.findUserByAnonId(req.body.userParams, (err, user)=>{
+            if(err) next(err);
 
-        userController.findUserByAnonId(req.body.anonymous_id);
+            console.log(err, user);
+        });
         res.send('us');
     }
 }
