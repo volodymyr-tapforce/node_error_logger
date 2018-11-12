@@ -18,7 +18,7 @@ class App extends Component {
         <Router>
           <div>
             <Route path="/userlist" component={UserList} />
-            <Route path="/errorlist" component={ErrorList} />
+            <Route path="/errorlist/:anonymous_id" component={ErrorList} />
           </div>
         </Router>
       </div>

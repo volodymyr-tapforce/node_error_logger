@@ -10,7 +10,7 @@ class UserList extends Component {
     }
     onItemClick = (anonymous_id)=>{
         return ()=>{
-            console.log(anonymous_id);
+            this.props.history.push('/errorlist/'+anonymous_id);
         }
     }
     componentDidMount= async()=>{
