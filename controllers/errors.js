@@ -5,11 +5,22 @@ var errorController = {
     createError:(req, res, next)=>{
         // console.log(req.body.userParams);
         userController.findUserByAnonId(req.body.userParams, (err, user)=>{
-            if(err) next(err);
+            if(err) return next(err);
 
-            console.log(err, user);
+            if(user) { 
+                const errorDocParams = {
+                    anonymous_id: user.anonymous_id,
+                    err_type: req.body.err_type,
+                    err_message: req.body.err_message,
+                }
+                const newErrorDoc = new errorModel(errorDocParams).save((errCreateErrDoc, errorDoc)=>{
+                    if(errCreateErrDoc) return next(errCreateErrDoc)
+                    else{
+                        return res.send(errorDoc);
+                    }
+                });
+            }
         });
-        res.send('us');
     }
 }
 

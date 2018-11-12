@@ -20,6 +20,9 @@ var userController = {
     createUser:(userParams, callback)=>{
         const newUser = new userModel(userParams);
         newUser.save(callback);
+    },
+    updateUser:(userParams)=>{
+
     }
 }
 
