@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Divider } from 'semantic-ui-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import UserList from './components/userList';
+import ErrorList from './components/errorList';
 
 import './App.css';
 
@@ -15,7 +16,10 @@ class App extends Component {
         <ErrorModal></ErrorModal>
         <Divider></Divider>
         <Router>
-          <Route path="/" component={UserList} />
+          <div>
+            <Route path="/userlist" component={UserList} />
+            <Route path="/errorlist" component={ErrorList} />
+          </div>
         </Router>
       </div>
     );

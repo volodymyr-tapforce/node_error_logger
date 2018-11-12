@@ -21,7 +21,7 @@ class ErrorForm extends Component {
 
     handleSubmit = ()=>{
         const componentRef = this;
-        axios.post('/errors', {
+        axios.post('/api/errors', {
             userParams:{
                 anonymous_id:this.state.anonymous_id
             },

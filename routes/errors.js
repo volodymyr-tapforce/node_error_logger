@@ -3,7 +3,7 @@ const router = express.Router();
 
 const errorController = require('../controllers/errors');
 
-router.get('/',errorController.getErrorByAnonId);
+router.get('/:anonymous_id',errorController.getErrorByAnonId);
 
 router.post('/',errorController.createError);
 

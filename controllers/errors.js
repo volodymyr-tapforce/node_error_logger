@@ -23,7 +23,7 @@ const errorController = {
         });
     },
     getErrorByAnonId:(req, res, next)=>{
-        errorModel.find({anonymous_id:req.query.anonymous_id})
+        errorModel.find({anonymous_id:req.params.anonymous_id})
         .exec((err,errorDocs)=>{
             if(err) return next(err)
             else{
