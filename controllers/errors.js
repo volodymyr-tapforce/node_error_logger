@@ -24,7 +24,7 @@ const errorController = {
     },
     getErrorByAnonId:(req, res, next)=>{
         errorModel.find({anonymous_id:req.params.anonymous_id})
-        .sort({date:-1})
+        .sort({created_at:-1})
         .exec((err,errorDocs)=>{
             if(err) return next(err)
             else{

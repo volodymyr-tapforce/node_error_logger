@@ -5,7 +5,7 @@ const serverApiCallService = {
 
 
     subscribeUsersListUpdate:(pubCallback)=>{
-        EventEmitter.subscribe('newuser', pubCallback);
+        return EventEmitter.subscribe('newuser', pubCallback);
     },
 
     unsubscribeUsersListUpdate:(subid)=>{
