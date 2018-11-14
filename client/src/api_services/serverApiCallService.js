@@ -16,8 +16,10 @@ const serverApiCallService = {
         EventEmitter.unsubscribe(subid);
     },
     // FETCH GET API
-    fetchUserList:async (responceCallback)=> {
-        const responce = await axios.get('/api/users');
+    fetchUserList:async (searchParams,responceCallback)=> {
+        const responce = await axios.get('/api/users',{
+            params:searchParams
+        });
         responceCallback(responce.data);
     },
 

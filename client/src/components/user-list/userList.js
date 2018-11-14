@@ -22,27 +22,28 @@ class UserList extends Component {
         }
     }
 
-    componentDidMount = ()=>{
+    handleSearchChange = (event)=> {
+        const searchParams = {...this.state.searchParams}
+        searchParams[event.target.name] = event.target.value;
+        this.setState({searchParams});
+    }
 
-        const updateUserList = () => serverApiCallService.fetchUserList((userList)=>{
+    searchUserByParams = ()=>{
+        serverApiCallService.fetchUserList({...this.state.searchParams},(userList)=>{
             this.setState({users:userList});
-        })
+        });
+    }
 
+    componentDidMount = ()=>{
+        const updateUserList = () => serverApiCallService.fetchUserList({...this.state.searchParams},(userList)=>{
+            this.setState({users:userList});
+        });
         updateUserList();
-
         this.userUpdateId = serverApiCallService.subUsersListUpdate(updateUserList);
     }
 
     componentWillUnmount = ()=>{
         serverApiCallService.eventUnsub(this.userSubUpdateId);
-    }
-
-    handleSearchChange = (event)=> {
-       
-        const searchParams = {...this.state.searchParams}
-        searchParams[event.target.name] = event.target.value;
-        console.log(searchParams);
-        this.setState({searchParams});
     }
 
     render() {
@@ -54,7 +55,7 @@ class UserList extends Component {
       return (
         <div>
            <Header as='h2'>User List</Header>
-           <UserSearchBar searchParams={this.state.searchParams} handleChange={this.handleSearchChange}/>
+           <UserSearchBar searchParams={this.state.searchParams} handleChange={this.handleSearchChange} handleSearch={this.searchUserByParams}/>
            <List>
                {usersItemArr}
            </List>

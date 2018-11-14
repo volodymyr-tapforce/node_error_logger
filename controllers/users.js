@@ -48,7 +48,11 @@ const userController = {
         let skip = req.query.page || 0;
         skip*=10;
         const limit = req.query.limit||10;
-        userModel.find()
+        // console.log(req.query);
+        userModel.find({
+            user_id:{'$regex':req.query.user_id},
+            email:{'$regex':req.query.email}
+        })
         .sort({lastErrorTime:-1})
         // .skip(skip)
         // .limit(limit)
