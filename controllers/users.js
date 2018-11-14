@@ -44,21 +44,29 @@ const userController = {
         user.set(paramsForUpdate);
         user.save(updateCallback);
     }, 
-    getUsers:(req, res, next)=>{
-        let skip = req.query.page || 0;
+    getUsers:async (req, res, next)=>{
+
+        const usersCount = await userModel.count({
+            user_id:{'$regex':req.query.user_id},
+            email:{'$regex':req.query.email}
+        }, function(err, count){
+            return count;
+        });
+
+        let skip = (req.query.page - 1) || 0;
         skip*=10;
         const limit = req.query.limit||10;
-        // console.log(req.query);
+
         userModel.find({
             user_id:{'$regex':req.query.user_id},
             email:{'$regex':req.query.email}
         })
         .sort({lastErrorTime:-1})
-        // .skip(skip)
-        // .limit(limit)
+        .skip(skip)
+        .limit(limit)
         .exec((err, users)=>{
             if(err) return next(err);
-            else res.send(users);
+            else res.send({users, usersCount});
         });
     }
 }

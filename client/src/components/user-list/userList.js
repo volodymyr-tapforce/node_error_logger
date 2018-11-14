@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Header } from 'semantic-ui-react';
+import { List, Header, Pagination } from 'semantic-ui-react';
 import UserListItem from './userListItem';
 import UserSearchBar from './userSearchBar';
 import serverApiCallService from '../../api_services/serverApiCallService';
@@ -8,9 +8,11 @@ class UserList extends Component {
 
     state = {
         users:[],
+        usersCount:0,
         searchParams:{
             user_id:'',
-            email:''
+            email:'',
+            page:1
         }
     }
 
@@ -30,16 +32,26 @@ class UserList extends Component {
 
     searchUserByParams = ()=>{
         serverApiCallService.fetchUserList({...this.state.searchParams},(userList)=>{
-            this.setState({users:userList});
+            this.setState({users:userList.users, usersCount:userList.usersCount});
         });
     }
 
     componentDidMount = ()=>{
         const updateUserList = () => serverApiCallService.fetchUserList({...this.state.searchParams},(userList)=>{
-            this.setState({users:userList});
+            this.setState({users:userList.users, usersCount:userList.usersCount});
         });
         updateUserList();
         this.userUpdateId = serverApiCallService.subUsersListUpdate(updateUserList);
+    }
+
+    onPageChange = async (e,{activePage}) =>{
+        const searchParams = {...this.state.searchParams}
+        searchParams.page = activePage;
+        await this.setState({searchParams});
+
+        serverApiCallService.fetchUserList({...this.state.searchParams},(userList)=>{
+            this.setState({users:userList.users, usersCount:userList.usersCount});
+        });
     }
 
     componentWillUnmount = ()=>{
@@ -59,6 +71,7 @@ class UserList extends Component {
            <List>
                {usersItemArr}
            </List>
+           <Pagination defaultActivePage={1} totalPages={Math.ceil(this.state.usersCount/10)} onPageChange={this.onPageChange} />
         </div>
         );
     }
