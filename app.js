@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log');
+mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log', { useNewUrlParser: true });
 
 
 const indexRouter = require('./routes/index');
