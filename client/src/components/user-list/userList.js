@@ -41,7 +41,7 @@ class UserList extends Component {
             this.setState({users:userList.users, usersCount:userList.usersCount});
         });
         updateUserList();
-        this.userUpdateId = serverApiCallService.subUsersListUpdate(updateUserList);
+        this.userSubUpdateId = serverApiCallService.subUsersListUpdate(updateUserList);
     }
 
     onPageChange = async (e,{activePage}) =>{

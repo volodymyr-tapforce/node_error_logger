@@ -27,12 +27,12 @@ class ErrorList extends Component {
 
         updateErroList(anonId);
 
-        this.userUpdateId = serverApiCallService.subsErroListUpdate(updateErroList);
+        this.errorSubUpdateId = serverApiCallService.subsErroListUpdate(updateErroList);
 
     }
 
     componentWillUnmount = ()=>{
-        serverApiCallService.eventUnsub(this.userSubUpdateId);
+        serverApiCallService.eventUnsub(this.errorSubUpdateId);
     }
 
     render() {

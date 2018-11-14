@@ -20,8 +20,10 @@ const EventEmitter = {
 
         for ( let eventName in EventEmitter.subscribers ) {
             const subscribersList = EventEmitter.subscribers[ eventName ];
+            
             for ( let j = 0, jl = subscribersList.length; j < jl; j ++ ) {
                 if ( subscribersList[ j ].id === subscribtionId ) {
+
                     subscribersList[ j ] = false;
                     return true;
                 }
