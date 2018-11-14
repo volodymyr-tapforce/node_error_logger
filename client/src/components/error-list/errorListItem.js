@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react'
-import '../../css/listItem.css'
 
 function ErrorListItem(props) {
     const imageSrc = props.err_type === 'error'?'/images/error.png':'/images/warning.png';

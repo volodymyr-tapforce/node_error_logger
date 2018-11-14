@@ -5,9 +5,7 @@
     padding:5px; 
     border:1px rgb(29, 26, 26) solid;
 }
-.list-item:hover{
-    background: gray;
-}
+
 
 .list-item>div{
     flex:1 1 ;

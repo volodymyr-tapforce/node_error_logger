@@ -1,10 +1,10 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react'
-import '../../css/listItem.css'
+import '../../css/userlist.css'
 
 function UserListItem(props) {
     return   <List.Item>
-                <div className="list-item" onClick={props.onItemClick}>
+                <div className="list-item" id="userlist" onClick={props.onItemClick}>
                     <div><Image avatar src='/images/user.png'/></div>
                     <div><b>anonymous_id:</b>{props.anonymous_id}</div>
                     <div><b>user_id:</b>{props.user_id}</div>
