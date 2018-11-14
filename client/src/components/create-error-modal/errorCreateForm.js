@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import ErrorFormInput from './errorFormInput';
-import serverApiCallService from '../api_services/serverApiCallService';
+import serverApiCallService from '../../api_services/serverApiCallService';
 
 
 class ErrorForm extends Component {

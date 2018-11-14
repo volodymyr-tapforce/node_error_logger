@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Divider } from 'semantic-ui-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import UserList from './components/userList';
-import ErrorList from './components/errorList';
+import UserList from './components/user-list/userList';
+import ErrorList from './components/error-list/errorList';
 
 import './App.css';
 
-import ErrorModal from './components/createErrorModal';
+import ErrorModal from './components/create-error-modal/createErrorModal';
 
 
 class App extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react'
-import '../css/listItem.css'
+import '../../css/listItem.css'
 
 function UserListItem(props) {
     return   <List.Item>

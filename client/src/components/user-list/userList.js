@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, Container, Header } from 'semantic-ui-react';
 import UserListItem from './userListItem';
-import serverApiCallService from '../api_services/serverApiCallService';
+import serverApiCallService from '../../api_services/serverApiCallService';
 
 class UserList extends Component {
 
