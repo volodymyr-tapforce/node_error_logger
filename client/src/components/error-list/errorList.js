@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Header } from 'semantic-ui-react';
+import { List, Header, Pagination } from 'semantic-ui-react';
 import ErrorListItem from './errorListItem';
 import serverApiCallService from '../../api_services/serverApiCallService';
 
@@ -7,7 +7,9 @@ import serverApiCallService from '../../api_services/serverApiCallService';
 class ErrorList extends Component {
 
     state={
-        errors:[]
+        errors:[],
+        errorsDocCount:0,
+        page:1
     }
 
     errorSubUpdateId = null;
@@ -18,9 +20,9 @@ class ErrorList extends Component {
 
         const updateErroList = (matchId) => {
             if(matchId===anonId)
-            serverApiCallService.fetchErrorList(anonId, (errorList) => {
+            serverApiCallService.fetchErrorList(anonId, this.state.page, (errorList) => {
                 this.setState({
-                    errors: errorList
+                    errors: errorList.errorDocs, errorsDocCount: errorList.errorsCount
                 });
             })
         }
@@ -33,6 +35,17 @@ class ErrorList extends Component {
 
     componentWillUnmount = ()=>{
         serverApiCallService.eventUnsub(this.errorSubUpdateId);
+    }
+
+    onPageChange = async (e,{activePage}) =>{
+     
+        await this.setState({page:activePage});
+        const anonId = this.props.match.params.anonymous_id;
+        serverApiCallService.fetchErrorList(anonId,this.state.page,(errorList)=>{
+            this.setState({
+                errors: errorList.errorDocs, errorsDocCount: errorList.errorsCount
+            });
+        });
     }
 
     render() {
@@ -48,6 +61,7 @@ class ErrorList extends Component {
            <List>
                {errorItemArr}
            </List>
+           <Pagination defaultActivePage={1} totalPages={Math.ceil(this.state.errorsDocCount/10)} onPageChange={this.onPageChange} />
         </div>
         );
     }

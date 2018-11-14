@@ -22,13 +22,24 @@ const errorController = {
             }
         });
     },
-    getErrorByAnonId:(req, res, next)=>{
+    getErrorByAnonId:async (req, res, next)=>{
+
+        const errorsCount = await errorModel.count({anonymous_id:req.params.anonymous_id}, function(err, count){
+            return count;
+        });
+
+        let skip = (req.query.page - 1) || 0;
+        skip*=10;
+        const limit = req.query.limit||10;
+        
         errorModel.find({anonymous_id:req.params.anonymous_id})
         .sort({created_at:-1})
+        .skip(skip)
+        .limit(limit)
         .exec((err,errorDocs)=>{
             if(err) return next(err)
             else{
-                res.send(errorDocs);
+                res.send({errorDocs, errorsCount});
             }
         });
     }

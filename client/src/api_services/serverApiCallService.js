@@ -23,8 +23,12 @@ const serverApiCallService = {
         responceCallback(responce.data);
     },
 
-    fetchErrorList:async(anonymous_id, responceCallback)=>{
-        const responce = await axios.get('/api/errors/'+anonymous_id);
+    fetchErrorList:async(anonymous_id, page, responceCallback)=>{
+        const responce = await axios.get('/api/errors/'+anonymous_id,{
+            params:{
+                page
+            }
+        });
         responceCallback(responce.data);
     },
     // POST API
