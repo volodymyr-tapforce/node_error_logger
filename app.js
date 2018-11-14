@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log');
+mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log', { useNewUrlParser: true });
 
 
 const indexRouter = require('./routes/index');
@@ -25,7 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use('/', indexRouter);
+// app.use('/', function(req, res, next) {
+//   res.redirect('/userlist');
+// });
 app.use('/errorlist', indexRouter);
 app.use('/userlist', indexRouter);
 app.use('/api/users', usersRouter);
