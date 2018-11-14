@@ -13,10 +13,10 @@ const errorController = {
                     err_type: req.body.err_type,
                     err_message: req.body.err_message,
                 }
-                const newErrorDoc = new errorModel(errorDocParams).save((errCreateErrDoc, errorDoc)=>{
+                new errorModel(errorDocParams).save((errCreateErrDoc, errorDoc)=>{
                     if(errCreateErrDoc) return next(errCreateErrDoc)
                     else{
-                        return res.send({isNewUser});
+                        return res.send({isNewUser, anonymous_id:user.anonymous_id});
                     }
                 });
             }

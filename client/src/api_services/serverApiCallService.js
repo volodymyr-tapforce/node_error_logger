@@ -3,31 +3,39 @@ import EventEmitter from '../utils/eventEmitter';
 
 const serverApiCallService = {
 
-
-    subscribeUsersListUpdate:(pubCallback)=>{
+    // Event Subscire 
+    subUsersListUpdate:(pubCallback)=>{
         return EventEmitter.subscribe('newuser', pubCallback);
     },
 
-    unsubscribeUsersListUpdate:(subid)=>{
+    subsErroListUpdate:(pubCallback)=>{
+        return EventEmitter.subscribe('newerror', pubCallback);
+    },
+
+    eventUnsub:(subid)=>{
         EventEmitter.unsubscribe(subid);
     },
-
+    // FETCH GET API
     fetchUserList:async (responceCallback)=> {
-
         const responce = await axios.get('/api/users');
         responceCallback(responce.data);
-
     },
 
+    fetchErrorList:async(anonymous_id, responceCallback)=>{
+        const responce = await axios.get('/api/errors/'+anonymous_id);
+        responceCallback(responce.data);
+    },
+    // POST API
     createErrorDoc:async (reqBody, responceCallback)=>{
 
         const responce = await axios.post('/api/errors', reqBody);
         responceCallback(responce);
 
-        // console.log(responce.data);
         if(responce.data.isNewUser){
             EventEmitter.publish('newuser');
         }
+
+        EventEmitter.publish('newerror',responce.data.anonymous_id);
 
     }
 

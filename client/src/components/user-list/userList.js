@@ -25,11 +25,11 @@ class UserList extends Component {
 
         updateUserList();
 
-        this.userUpdateId = serverApiCallService.subscribeUsersListUpdate(updateUserList);
+        this.userUpdateId = serverApiCallService.subUsersListUpdate(updateUserList);
     }
 
     componentWillUnmount = ()=>{
-        serverApiCallService.unsubscribeUsersListUpdate(this.userSubUpdateId);
+        serverApiCallService.eventUnsub(this.userSubUpdateId);
     }
 
     render() {

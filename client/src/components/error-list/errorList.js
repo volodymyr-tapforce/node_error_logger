@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { List, Container, Header } from 'semantic-ui-react';
-import axios from 'axios';
 import ErrorListItem from './errorListItem';
+import serverApiCallService from '../../api_services/serverApiCallService';
+
 
 class ErrorList extends Component {
 
@@ -9,10 +10,31 @@ class ErrorList extends Component {
         errors:[]
     }
 
-    componentDidMount= async()=>{
-        const responce = await axios.get('/api/errors/'+this.props.match.params.anonymous_id);
-        this.setState({errors:responce.data});
+    errorSubUpdateId = null;
+
+    componentDidMount= async()=> {
+     
+        const anonId = this.props.match.params.anonymous_id;
+
+        const updateErroList = (matchId) => {
+            if(matchId===anonId)
+            serverApiCallService.fetchErrorList(anonId, (errorList) => {
+                this.setState({
+                    errors: errorList
+                });
+            })
+        }
+
+        updateErroList(anonId);
+
+        this.userUpdateId = serverApiCallService.subsErroListUpdate(updateErroList);
+
     }
+
+    componentWillUnmount = ()=>{
+        serverApiCallService.eventUnsub(this.userSubUpdateId);
+    }
+
     render() {
 
       const errors = this.state.errors;  
