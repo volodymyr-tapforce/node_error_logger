@@ -38,8 +38,8 @@ const userController = {
             // ...user,
             lastErrorTime: new Date()
         }
-        if(user.email!==userParams.email) paramsForUpdate.email = userParams.email;
-        if(user.user_id!==userParams.user_id) paramsForUpdate.user_id = userParams.user_id;
+        if(userParams.email&&(user.email!==userParams.email)) paramsForUpdate.email = userParams.email;
+        if(userParams.user_id&&(user.user_id!==userParams.user_id)) paramsForUpdate.user_id = userParams.user_id;
 
         user.set(paramsForUpdate);
         user.save(updateCallback);
@@ -49,7 +49,7 @@ const userController = {
         skip*=10;
         const limit = req.query.limit||10;
         userModel.find()
-        .sort({date:-1})
+        .sort({lastErrorTime:-1})
         // .skip(skip)
         // .limit(limit)
         .exec((err, users)=>{
