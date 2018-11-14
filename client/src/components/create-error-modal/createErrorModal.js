@@ -5,11 +5,13 @@ import ErrorForm from './errorCreateForm';
 class ErrorModal extends Component {
     render() {
       return (
+        <div style={{paddingTop:'10px'}}>
         <Modal trigger={<Button>Create Error</Button>} size={'tiny'}>
         <Modal.Content image>
             <ErrorForm></ErrorForm>
         </Modal.Content>
-      </Modal>
+        </Modal>
+        </div>
       );
     }
   }

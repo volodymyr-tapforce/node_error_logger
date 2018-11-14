@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { List, Container, Header } from 'semantic-ui-react';
+import { List, Header } from 'semantic-ui-react';
 import UserListItem from './userListItem';
+import UserSearchBar from './userSearchBar';
 import serverApiCallService from '../../api_services/serverApiCallService';
 
 class UserList extends Component {
 
     state = {
-        users:[]
+        users:[],
+        searchParams:{
+            user_id:'',
+            email:''
+        }
     }
 
     userSubUpdateId = null;
@@ -32,6 +37,14 @@ class UserList extends Component {
         serverApiCallService.eventUnsub(this.userSubUpdateId);
     }
 
+    handleSearchChange = (event)=> {
+       
+        const searchParams = {...this.state.searchParams}
+        searchParams[event.target.name] = event.target.value;
+        console.log(searchParams);
+        this.setState({searchParams});
+    }
+
     render() {
       const users = this.state.users;  
       const onItemClick = this.onItemClick;
@@ -41,11 +54,10 @@ class UserList extends Component {
       return (
         <div>
            <Header as='h2'>User List</Header>
-           <Container>
+           <UserSearchBar searchParams={this.state.searchParams} handleChange={this.handleSearchChange}/>
            <List>
                {usersItemArr}
            </List>
-           </Container>
         </div>
         );
     }

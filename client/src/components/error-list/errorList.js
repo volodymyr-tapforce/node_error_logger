@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Container, Header } from 'semantic-ui-react';
+import { List, Header } from 'semantic-ui-react';
 import ErrorListItem from './errorListItem';
 import serverApiCallService from '../../api_services/serverApiCallService';
 
@@ -45,11 +45,9 @@ class ErrorList extends Component {
       return (
         <div>
            <Header as='h2'>Error List</Header>
-           <Container>
            <List>
                {errorItemArr}
            </List>
-           </Container>
         </div>
         );
     }
