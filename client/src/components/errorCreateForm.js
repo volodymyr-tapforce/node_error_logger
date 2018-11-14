@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import ErrorFormInput from './errorFormInput';
-import axios from 'axios';
+import serverApiCallService from '../api_services/serverApiCallService';
+
 
 class ErrorForm extends Component {
 
@@ -22,8 +23,8 @@ class ErrorForm extends Component {
     }
 
     handleSubmit = ()=>{
-        const componentRef = this;
-        axios.post('/api/errors', {
+    
+        const reqBody = {
             userParams:{
                 anonymous_id:this.state.anonymous_id,
                 email:this.state.email,
@@ -31,21 +32,19 @@ class ErrorForm extends Component {
             },
             err_type: this.state.err_type,
             err_message:this.state.err_message
-          })
-          .then(function (response) {
-            if(response.status===200){
-                componentRef.setState({
-                    anonymous_id:'',
-                    err_type:'',
-                    err_message:'',
-                    email:'',
-                    user_id:''
+        }
+
+        serverApiCallService.createErrorDoc(reqBody, (response)=>{
+            if (response.status === 200) {
+                this.setState({
+                    anonymous_id: '',
+                    err_type: '',
+                    err_message: '',
+                    email: '',
+                    user_id: ''
                 })
             }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        });
     }
 
     render() {

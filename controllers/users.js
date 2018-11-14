@@ -10,10 +10,14 @@ const userController = {
             } else if(!user){
                 userController.createUser(userParams,(createError, newUser)=>{
                     if(createError) findCallback(err)
-                    else findCallback(null,newUser);
+                    else { 
+                        const isNewUser = true;
+                        findCallback(null,newUser, isNewUser);
+                    }
                 });
             } else {
-                findCallback(null, user);
+                const isNewUser = false;
+                findCallback(null, user, isNewUser);
             }
         })
     },

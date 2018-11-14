@@ -4,7 +4,7 @@ const userController = require('./users');
 const errorController = {
     createError:(req, res, next)=>{
         // console.log(req.body.userParams);
-        userController.findUserByAnonId(req.body.userParams, (err, user)=>{
+        userController.findUserByAnonId(req.body.userParams, (err, user, isNewUser)=>{
             if(err) return next(err);
 
             if(user) { 
@@ -16,7 +16,7 @@ const errorController = {
                 const newErrorDoc = new errorModel(errorDocParams).save((errCreateErrDoc, errorDoc)=>{
                     if(errCreateErrDoc) return next(errCreateErrDoc)
                     else{
-                        return res.send(errorDoc);
+                        return res.send({isNewUser});
                     }
                 });
             }

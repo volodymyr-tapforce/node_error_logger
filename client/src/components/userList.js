@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import { List, Container, Header } from 'semantic-ui-react';
 import UserListItem from './userListItem';
-import axios from 'axios';
+import serverApiCallService from '../api_services/serverApiCallService';
 
 class UserList extends Component {
 
     state = {
         users:[]
     }
+
+    userSubUpdateId = null;
+
     onItemClick = (anonymous_id)=>{
         return ()=>{
             this.props.history.push('/errorlist/'+anonymous_id);
         }
     }
-    componentDidMount= async()=>{
-        const responce = await axios.get('/api/users');
-        this.setState({users:responce.data});
+
+    componentDidMount = ()=>{
+
+        const updateUserList = () => serverApiCallService.fetchUserList((userList)=>{
+            this.setState({users:userList});
+        })
+
+        updateUserList();
+
+        this.userUpdateId = serverApiCallService.subscribeUsersListUpdate(updateUserList);
     }
+
+    componentWillUnmount = ()=>{
+        serverApiCallService.unsubscribeUsersListUpdate(this.userSubUpdateId);
+    }
+
     render() {
       const users = this.state.users;  
       const onItemClick = this.onItemClick;
