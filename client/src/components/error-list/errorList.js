@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { List, Header, Pagination } from 'semantic-ui-react';
+import { List, Header, Pagination, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import ErrorListItem from './errorListItem';
 import serverApiCallService from '../../api_services/serverApiCallService';
 
@@ -13,9 +14,12 @@ class ErrorList extends Component {
     }
 
     errorSubUpdateId = null;
+    user = {};
 
     componentDidMount= async()=> {
-     
+
+        this.user = this.props.history.location.state.user;
+    
         const anonId = this.props.match.params.anonymous_id;
 
         const updateErroList = (matchId) => {
@@ -58,6 +62,13 @@ class ErrorList extends Component {
       return (
         <div>
            <Header as='h2'>Error List</Header>
+           <Link to="/userlist">Userlist</Link>
+           <div className="list-item" >
+                    <div><Image avatar src='/images/user.png'/></div>
+                    <div><b>anonymous_id:</b>{this.user.anonymous_id}</div>
+                    <div><b>user_id:</b>{this.user.user_id}</div>
+                    <div><b>email:</b>{this.user.email}</div>
+            </div>
            <List>
                {errorItemArr}
            </List>
