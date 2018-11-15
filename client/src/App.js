@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Divider,Container } from 'semantic-ui-react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import UserList from './components/user-list/userList';
 import ErrorList from './components/error-list/errorList';
 
@@ -19,6 +19,7 @@ class App extends Component {
           <Divider></Divider>
           <Router>
             <div>
+              <Redirect from="/" to="/userlist" />
               <Route path="/userlist" component={UserList} />
               <Route path="/errorlist/:anonymous_id" component={ErrorList} />
             </div>
