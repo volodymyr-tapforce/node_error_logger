@@ -26,12 +26,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
-app.use('/', indexRouter);
 app.use('/errorlist', indexRouter);
 app.use('/errorlist/*', indexRouter);
 app.use('/userlist', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/errors', errorRouter);
+// app.use('/', indexRouter);
+
 
 
 
