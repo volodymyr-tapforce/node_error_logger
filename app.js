@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 //   res.redirect('/userlist');
 // });
 app.use('/errorlist', indexRouter);
+app.use('/errorlist/*', indexRouter);
 app.use('/userlist', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/errors', errorRouter);
