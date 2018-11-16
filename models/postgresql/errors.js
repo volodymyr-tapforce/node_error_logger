@@ -1,5 +1,5 @@
 const parse = require('postgres-date');
-const sequelize = require('../../db');
+const sequelize = require('../../db/sequelizejsConfig');
 const Sequelize = require('sequelize');
 
 const errorsModel = sequelize.define('error', {
@@ -17,7 +17,7 @@ const errorsModel = sequelize.define('error', {
     },
     created_at: {
         type: Sequelize.DATE,
-        defaultValue: parse(new Date())
+        defaultValue: new Date()
     }
 });
 
