@@ -1,4 +1,3 @@
-const parse = require('postgres-date');
 const sequelize = require('../../db/sequelizejsConfig');
 const Sequelize = require('sequelize');
 

@@ -1,4 +1,3 @@
-const parse = require('postgres-date');
 const sequelize = require('../../db');
 const Sequelize = require('sequelize');
 
@@ -15,11 +14,11 @@ const usersModel = sequelize.define('user', {
     },
     created_at: {
         type: Sequelize.DATE,
-        defaultValue: parse(new Date())
+        defaultValue: new Date()
     },
     lastErrorTime: {
         type: Sequelize.DATE,
-        defaultValue: parse(new Date())
+        defaultValue: new Date()
     }
 });
 
