@@ -32,12 +32,10 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // });
 app.use('/errorlist', indexRouter);
 app.use('/userlist', indexRouter);
-// sequelize.sync().then(()=>{
-  app.use('/api/users', usersRouter);
-  app.use('/api/errors', errorRouter);
-// });
-// app.use('/*', indexRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/errors', errorRouter);
 
+// app.use('/*', indexRouter);
 
 
 // catch 404 and forward to error handler

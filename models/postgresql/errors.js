@@ -20,6 +20,8 @@ const errorsModel = sequelize.define('error', {
     }
 });
 
+sequelize.sync();
+
 module.exports = errorsModel;
 
 

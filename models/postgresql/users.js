@@ -1,4 +1,4 @@
-const sequelize = require('../../db');
+const sequelize = require('../../db/sequelizejsConfig');
 const Sequelize = require('sequelize');
 
 const usersModel = sequelize.define('user', {
@@ -21,5 +21,7 @@ const usersModel = sequelize.define('user', {
         defaultValue: new Date()
     }
 });
+
+sequelize.sync();
 
 module.exports = usersModel;
