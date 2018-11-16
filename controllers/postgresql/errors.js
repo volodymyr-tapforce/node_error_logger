@@ -10,9 +10,9 @@ const errorController = {
         // }).then((result)=>{
         //     res.send(result);
         // })
-        userController.findUserByAnonId(req.body.userParams, (...args)=>{
+        userController.findUserByAnonId(req.body.userParams, (user)=>{
             // if empy return null
-            res.send(args);
+            res.send(user);
         });
     },
     getErrorByAnonId:async (req, res, next)=>{
