@@ -24,7 +24,31 @@ const userController = {
 
         return user.update(paramsForUpdate);
     }, 
+    getUsers:async (req, res, next)=>{
 
+        // const usersCount = await userModel.count({
+        //     user_id:{'$regex':req.query.user_id},
+        //     email:{'$regex':req.query.email}
+        // }, function(err, count){
+        //     return count;
+        // });
+
+        // let skip = (req.query.page - 1) || 0;
+        // skip*=10;
+        // const limit = req.query.limit||10;
+
+        // userModel.find({
+        //     user_id:{'$regex':req.query.user_id},
+        //     email:{'$regex':req.query.email}
+        // })
+        // .sort({lastErrorTime:-1})
+        // .skip(skip)
+        // .limit(limit)
+        // .exec((err, users)=>{
+        //     if(err) return next(err);
+        //     else res.send({users, usersCount});
+        // });
+    }
 }
 
 module.exports = userController;
