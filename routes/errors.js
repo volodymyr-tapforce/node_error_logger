@@ -3,8 +3,10 @@ const router = express.Router();
 
 const errorController = require('../controllers/errors');
 
+const sequlizeErrorController = require('../controllers/postgresql/errors');
+
 router.get('/:anonymous_id',errorController.getErrorByAnonId);
 
-router.post('/',errorController.createError);
+router.post('/',sequlizeErrorController.createError);
 
 module.exports = router;

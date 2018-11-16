@@ -5,7 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log', { useNewUrlParser: true });
+// mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log', { useNewUrlParser: true });
+
+const sequelize = require('./db/sequelizejsConfig');
 
 
 const indexRouter = require('./routes/index');
@@ -32,6 +34,8 @@ app.use('/userlist', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/errors', errorRouter);
 // app.use('/', indexRouter);
+
+// app.use('/*', indexRouter);
 
 
 
