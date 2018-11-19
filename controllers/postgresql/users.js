@@ -1,4 +1,7 @@
 const userModel = require('../../models/postgresql/users');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 const userController = {
     findUserByAnonId:  (userParams, findCallback) => {
@@ -27,8 +30,18 @@ const userController = {
     getUsers:async (req, res, next)=>{
 
         //+ where to email and user id
-        const where = {user_id:{like:req.query.user_id}, email:{like:req.query.email}}
+        req.query.user_id = req.query.user_id||'';
+        req.query.email = req.query.email||'';
+        const where = {
+            user_id: {
+                [Op.like]: `%${req.query.user_id}`
+            },
+            email: {
+                [Op.like]: `%${req.query.email}`
+            }
+        }
         const usersCount = await userModel.count({where});
+
 
         let offset = (req.query.page - 1) || 0;
         offset*=10;
