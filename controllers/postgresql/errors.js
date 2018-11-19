@@ -16,7 +16,15 @@ const errorController = {
         });
     },
     getErrorByAnonId:async (req, res, next)=>{
+        const where = {anonymous_id:req.params.anonymous_id};
+        const errorsCount = await errorModel.count({where}); 
 
+        let offset = (req.query.page - 1) || 0;
+        offset*=10;
+        const limit = req.query.limit||10;
+
+        const errorDocs = await errorModel.findAll({ where,limit, offset, order: [['createdAt', 'DESC']]  });
+        res.send({errorsCount,errorDocs});
     }
 }
 
