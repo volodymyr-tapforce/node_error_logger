@@ -34,10 +34,10 @@ const userController = {
         req.query.email = req.query.email||'';
         const where = {
             user_id: {
-                [Op.like]: `%${req.query.user_id}`
+                [Op.like]: `%${req.query.user_id}%`
             },
             email: {
-                [Op.like]: `%${req.query.email}`
+                [Op.like]: `%${req.query.email}%`
             }
         }
         const usersCount = await userModel.count({where});
