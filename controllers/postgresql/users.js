@@ -26,28 +26,15 @@ const userController = {
     }, 
     getUsers:async (req, res, next)=>{
 
-        // const usersCount = await userModel.count({
-        //     user_id:{'$regex':req.query.user_id},
-        //     email:{'$regex':req.query.email}
-        // }, function(err, count){
-        //     return count;
-        // });
+        const usersCount = await userModel.count();
 
-        // let skip = (req.query.page - 1) || 0;
-        // skip*=10;
-        // const limit = req.query.limit||10;
+        let offset = (req.query.page - 1) || 0;
+        offset*=10;
+        const limit = req.query.limit||10;
+        const users = await userModel.findAll({ limit, offset, order: [['lastErrorTime', 'DESC']]  });
 
-        // userModel.find({
-        //     user_id:{'$regex':req.query.user_id},
-        //     email:{'$regex':req.query.email}
-        // })
-        // .sort({lastErrorTime:-1})
-        // .skip(skip)
-        // .limit(limit)
-        // .exec((err, users)=>{
-        //     if(err) return next(err);
-        //     else res.send({users, usersCount});
-        // });
+        res.send({usersCount, users});
+
     }
 }
 
