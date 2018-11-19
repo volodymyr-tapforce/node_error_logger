@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-const errorController = require('../controllers/errors');
-
 const sequlizeErrorController = require('../controllers/postgresql/errors');
 
-router.get('/:anonymous_id',errorController.getErrorByAnonId);
+// const errorController = require('../controllers/errors');
+
+
+router.get('/:anonymous_id',sequlizeErrorController.getErrorByAnonId);
 
 router.post('/',sequlizeErrorController.createError);
 
