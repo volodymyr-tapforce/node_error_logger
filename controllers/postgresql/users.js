@@ -26,12 +26,14 @@ const userController = {
     }, 
     getUsers:async (req, res, next)=>{
 
-        const usersCount = await userModel.count();
+        //+ where to email and user id
+        const where = {user_id:{like:req.query.user_id}, email:{like:req.query.email}}
+        const usersCount = await userModel.count({where});
 
         let offset = (req.query.page - 1) || 0;
         offset*=10;
         const limit = req.query.limit||10;
-        const users = await userModel.findAll({ limit, offset, order: [['lastErrorTime', 'DESC']]  });
+        const users = await userModel.findAll({ where, limit, offset, order: [['lastErrorTime', 'DESC']]  });
 
         res.send({usersCount, users});
 
