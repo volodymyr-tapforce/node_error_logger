@@ -10,7 +10,7 @@ const sequelize = new Sequelize('sequlizeGraphile', 'postgres', 'webdev`8', {
     operatorsAliases: false,
     logging: false
 });
-
+// Models defination from models folders
 fs
   .readdirSync(path.join(__dirname, '/../models/postgresql/'))
   .filter(function(file) {
@@ -26,6 +26,16 @@ Object.keys(db).forEach(function(modelName) {
     db[modelName].associate(db);
   }
 });
+// triggers defination
+fs
+  .readdirSync(path.join(__dirname, '/triggers/'))
+  .filter(function(file) {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(function(file) {
+    require(path.join(__dirname, '/triggers/', file))(sequelize);
+  });
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

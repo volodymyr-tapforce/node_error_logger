@@ -8,6 +8,7 @@ const { postgraphile } = require("postgraphile");
 
 const indexRouter = require('./routes/index');
 
+
 const app = express();
 
 // view engine setup
@@ -30,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // app.use('/*', indexRouter);
 
-app.use(postgraphile( "postgres://postgres:webdev`8@localhost/sequlizeGraphile"));
+// app.use(postgraphile( "postgres://postgres:webdev`8@localhost/sequlizeGraphile"));
 
 
 // catch 404 and forward to error handler

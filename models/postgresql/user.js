@@ -1,3 +1,9 @@
+/**
+ * postgraphile
+ * Column names are changed to camelCase: created_at → createdAt
+ * 
+ * any table that has a primary key will automatically have a unique nodeId field available for queries and mutations
+ */
 module.exports = (sequelize, DataTypes) =>{
     const user = sequelize.define('user', {
     anonymousId: {
