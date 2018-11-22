@@ -3,17 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('mongoose');
-
-// mongoose.connect('mongodb://volodymyr:bimba123@ds063889.mlab.com:63889/node_log', { useNewUrlParser: true });
-
-const sequelize = require('./db/sequelizejsConfig');
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const errorRouter = require('./routes/errors');
-
 
 const app = express();
 
@@ -30,10 +22,10 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // app.use('/', function(req, res, next) {
 //   res.redirect('/userlist');
 // });
-app.use('/errorlist', indexRouter);
-app.use('/userlist', indexRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/errors', errorRouter);
+// app.use('/errorlist', indexRouter);
+// app.use('/userlist', indexRouter);
+// app.use('/api/users', usersRouter);
+// app.use('/api/errors', errorRouter);
 
 // app.use('/*', indexRouter);
 
