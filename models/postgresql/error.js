@@ -11,10 +11,17 @@ module.exports = (sequelize, DataTypes) =>{
     errMessage: {
         type: DataTypes.STRING(1234),
         allowNull: false,
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: new Date()
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: new Date()
     }
     });
     error.associate = function(models) {
-        console.log(models.error);
         models.error.belongsTo(models.user, { foreignKey: 'anonymousId', targetKey: 'anonymousId' });
     }
 

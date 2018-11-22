@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const { postgraphile } = require("postgraphile");
 
 
 const indexRouter = require('./routes/index');
@@ -28,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // app.use('/api/errors', errorRouter);
 
 // app.use('/*', indexRouter);
+
+app.use(postgraphile( "postgres://postgres:webdev`8@localhost/sequlizeGraphile"));
 
 
 // catch 404 and forward to error handler

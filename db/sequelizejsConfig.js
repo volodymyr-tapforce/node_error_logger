@@ -8,6 +8,7 @@ const sequelize = new Sequelize('sequlizeGraphile', 'postgres', 'webdev`8', {
     host: 'localhost',
     dialect: 'postgres',
     operatorsAliases: false,
+    logging: false
 });
 
 fs

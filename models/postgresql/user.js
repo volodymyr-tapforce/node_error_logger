@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) =>{
     lastErrorTime: {
         type: DataTypes.DATE,
         defaultValue: new Date()
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: new Date()
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: new Date()
     }
     });
 
