@@ -27,12 +27,20 @@ const error = (sequelize, DataTypes) => {
     };
 
     Error.defineHooks = models=>{
-        Error.beforeCreate(async (errorParams) => {
-            const anonymusId = errorParams.dataValues.anonymusId;
+        Error.beforeCreate(async (errorInstance, options) => {
+            const userParams = options.userParams;
+            const anonymusId = errorInstance.dataValues.anonymusId;
             await models.User.findOrCreate({
                 where:{anonymusId},
-                defaults:{anonymusId}
-            });
+                defaults:{anonymusId, ...userParams}
+            }).spread(async (user, created) => {
+                if(user) {
+                    Object.keys(userParams).forEach((key)=>{
+                        user[key] = userParams[key];
+                    });
+                    await user.save();
+                }
+            })
         });
     }
 
