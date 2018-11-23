@@ -1,27 +1,37 @@
-const sequelize = require('../../db/sequelizejsConfig');
-const Sequelize = require('sequelize');
 
-const usersModel = sequelize.define('user', {
-    anonymous_id: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    user_id: {
-        type: Sequelize.STRING
-    },
-    email: {
-        type: Sequelize.STRING
-    },
-    created_at: {
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-    },
-    lastErrorTime: {
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-    }
-});
+const user = (sequelize, DataTypes) => {
 
-sequelize.sync();
+    const User = sequelize.define('user', {
+            anonymous_id: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            user_id: {
+                type: DataTypes.STRING
+            },
+            email: {
+                type: DataTypes.STRING
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                defaultValue: new Date()
+            },
+            lastErrorTime: {
+                type: DataTypes.DATE,
+                defaultValue: new Date()
+            }
+    });
 
-module.exports = usersModel;
+    User.associate = models => {
+        User.hasMany(models.Error,{ foreignKey: 'anonymous_id', targetKey: 'anonymous_id' });
+    };
+
+    // Error.beforeCreate(async user => {
+    //     user.password = await user.generatePasswordHash();
+    // });
+
+    return User;
+
+}
+export default user;
+

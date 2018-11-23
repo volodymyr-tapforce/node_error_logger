@@ -3,19 +3,36 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon --exec babel-node ./bin/www"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0"
   },
   "dependencies": {
+    "apollo-server": "^2.2.2",
+    "apollo-server-express": "^2.2.2",
+    "bcrypt": "^3.0.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "create-react-app": "^2.1.1",
+    "dataloader": "^1.4.0",
     "debug": "~2.6.9",
+    "dotenv": "^6.1.0",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
+    "graphql": "^14.0.2",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-resolvers": "^0.2.2",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.11",
     "morgan": "~1.9.0",
     "pg": "^7.6.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
+    "uuid": "^3.3.2"
   }
 }

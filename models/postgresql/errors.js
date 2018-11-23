@@ -1,27 +1,38 @@
-const sequelize = require('../../db/sequelizejsConfig');
-const Sequelize = require('sequelize');
 
-const errorsModel = sequelize.define('error', {
-    anonymous_id: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    err_type: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    err_message: {
-        type: Sequelize.STRING(1234),
-        allowNull: false,
-    },
-    created_at: {
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-    }
-});
+const error = (sequelize, DataTypes) => {
 
-sequelize.sync();
+    const Error = sequelize.define('error', {
 
-module.exports = errorsModel;
+        anonymous_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        err_type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        err_message: {
+            type: DataTypes.STRING(1234),
+            allowNull: false,
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            defaultValue: new Date()
+        }
+
+    });
+
+    Error.associate = models => {
+        Error.belongsTo(models.User,{ foreignKey: 'anonymous_id', targetKey: 'anonymous_id' });
+    };
+
+    // Error.beforeCreate(async user => {
+    //     user.password = await user.generatePasswordHash();
+    // });
+
+    return Error;
+
+}
+export default error;
 
 

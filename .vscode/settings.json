@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "__error": "Not found",
+    "node_modules": true,
+    "views": true,
+    ".gitignore": true,
+    ".vscode": true,
+    "public": true
+  }
+}
