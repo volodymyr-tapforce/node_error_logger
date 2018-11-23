@@ -2,9 +2,10 @@
 const user = (sequelize, DataTypes) => {
 
     const User = sequelize.define('user', {
-            anonymous_id: {
+            anonymusId: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true
             },
             user_id: {
                 type: DataTypes.STRING
@@ -23,7 +24,7 @@ const user = (sequelize, DataTypes) => {
     });
 
     User.associate = models => {
-        User.hasMany(models.Error,{ foreignKey: 'anonymous_id', targetKey: 'anonymous_id' });
+        User.hasMany(models.Error,{ foreignKey: 'anonymusId', sourceKey: 'anonymusId' });
     };
 
     // Error.beforeCreate(async user => {

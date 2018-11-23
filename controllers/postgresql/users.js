@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 const userController = {
     findUserByAnonId:  (userParams, findCallback) => {
-        userModel.findOne({ where: {anonymous_id: userParams.anonymous_id} }).then(async (user )=> {
+        userModel.findOne({ where: {anonymusId: userParams.anonymusId} }).then(async (user )=> {
             if(user === null){
                 const newUser = await userController.createUser(userParams);
                 findCallback(newUser);

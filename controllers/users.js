@@ -3,7 +3,7 @@ const userModel = require('../models/users');
 const userController = {
     findUserByAnonId: (userParams, findCallback) => {
         userModel.findOne({
-            anonymous_id: userParams.anonymous_id
+            anonymusId: userParams.anonymusId
         }, (err, user) => {
             if (err) {
                 findCallback(err);

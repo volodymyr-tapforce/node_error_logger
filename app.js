@@ -1,41 +1,108 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+// import 'dotenv/config';
+import cors from 'cors';
+import morgan from 'morgan';
+import http from 'http';
+import jwt from 'jsonwebtoken';
+import DataLoader from 'dataloader';
+import express from 'express';
+import {
+  ApolloServer,
+  AuthenticationError,
+} from 'apollo-server-express';
 
-import models, { sequelize } from './models/postgresql';
-
+import schema from './models/graphqlShemas';
+import resolvers from './qraphqlResolvers';
+import models, { sequelize } from './models/sequelize';
+// import loaders from './loaders';
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(cors());
+app.use(morgan('dev'));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'client/build')));
+// const getMe = async req => {
+//   const token = req.headers['x-token'];
 
+//   if (token) {
+//     try {
+//       return await jwt.verify(token, process.env.SECRET);
+//     } catch (e) {
+//       throw new AuthenticationError(
+//         'Your session expired. Sign in again.',
+//       );
+//     }
+//   }
+// };
 
+const server = new ApolloServer({
+  introspection: true,
+  typeDefs: schema,
+  resolvers,
+  // formatError: error => {
+  //   // remove the internal sequelize error message
+  //   // leave only the important validation error
+  //   const message = error.message
+  //     .replace('SequelizeValidationError: ', '')
+  //     .replace('Validation error: ', '');
 
+  //   return {
+  //     ...error,
+  //     message,
+  //   };
+  // },
+  // context: async ({ req, connection }) => {
+  //   if (connection) {
+  //     return {
+  //       models,
+  //       loaders: {
+  //         user: new DataLoader(keys =>
+  //           loaders.user.batchUsers(keys, models),
+  //         ),
+  //       },
+  //     };
+  //   }
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+  //   if (req) {
+  //     const me = await getMe(req);
+
+  //     return {
+  //       models,
+  //       me,
+  //       secret: process.env.SECRET,
+  //       loaders: {
+  //         user: new DataLoader(keys =>
+  //           loaders.user.batchUsers(keys, models),
+  //         ),
+  //       },
+  //     };
+  //   }
+  // },
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+server.applyMiddleware({ app, path: '/graphql' });
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+const httpServer = http.createServer(app);
+// server.installSubscriptionHandlers(httpServer);
+
+// const isTest = !!process.env.TEST_DATABASE;
+// const isProduction = !!process.env.DATABASE_URL;
+const port = process.env.PORT || 8000;
+sequelize.sync().then(async()=>{
+  await models.Error.create({
+    anonymusId:'1', 
+    err_type:'1', 
+    err_message:'123'
+  });
+  httpServer.listen({ port }, () => {
+    console.log(`Apollo Server on http://localhost:${port}/graphql`);
+  });
 });
+// sequelize.sync({ force: isTest || isProduction }).then(async () => {
+//   if (isTest || isProduction) {
+//     createUsersWithMessages(new Date());
+//   }
 
-module.exports = app;
+//   httpServer.listen({ port }, () => {
+//     console.log(`Apollo Server on http://localhost:${port}/graphql`);
+//   });
+// });

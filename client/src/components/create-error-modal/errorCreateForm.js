@@ -9,7 +9,7 @@ class ErrorForm extends Component {
     constructor(props){
         super(props);
         this.state={
-            anonymous_id:'',
+            anonymusId:'',
             err_type:'',
             err_message:'',
             email:'',
@@ -26,7 +26,7 @@ class ErrorForm extends Component {
     
         const reqBody = {
             userParams:{
-                anonymous_id:this.state.anonymous_id,
+                anonymusId:this.state.anonymusId,
                 email:this.state.email,
                 user_id:this.state.user_id
             },
@@ -37,7 +37,7 @@ class ErrorForm extends Component {
         serverApiCallService.createErrorDoc(reqBody, (response)=>{
             if (response.status === 200) {
                 this.setState({
-                    anonymous_id: '',
+                    anonymusId: '',
                     err_type: '',
                     err_message: '',
                     email: '',
@@ -52,7 +52,7 @@ class ErrorForm extends Component {
         <div style={{width:'100%'}}>
         <Segment >
         <Form onSubmit={this.handleSubmit}>
-          <ErrorFormInput name={'anonymous_id'} value={this.state.anonymous_id} handleChange={this.handleChange}></ErrorFormInput>
+          <ErrorFormInput name={'anonymusId'} value={this.state.anonymusId} handleChange={this.handleChange}></ErrorFormInput>
           <ErrorFormInput name={'err_type'} value={this.state.err_type}  handleChange={this.handleChange}></ErrorFormInput>
           <ErrorFormInput name={'err_message'} value={this.state.err_message}  handleChange={this.handleChange}></ErrorFormInput>
           <hr/>

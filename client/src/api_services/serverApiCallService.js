@@ -23,8 +23,8 @@ const serverApiCallService = {
         responceCallback(responce.data);
     },
 
-    fetchErrorList:async(anonymous_id, page, responceCallback)=>{
-        const responce = await axios.get('/api/errors/'+anonymous_id,{
+    fetchErrorList:async(anonymusId, page, responceCallback)=>{
+        const responce = await axios.get('/api/errors/'+anonymusId,{
             params:{
                 page
             }
@@ -41,7 +41,7 @@ const serverApiCallService = {
             EventEmitter.publish('newuser');
         }
 
-        EventEmitter.publish('newerror',responce.data.anonymous_id);
+        EventEmitter.publish('newerror',responce.data.anonymusId);
 
     }
 

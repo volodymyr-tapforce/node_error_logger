@@ -20,7 +20,7 @@ class UserList extends Component {
 
     onItemClick = (user)=>{
         return ()=>{
-            this.props.history.push({pathname:'/errorlist/'+user.anonymous_id, state:{user}});
+            this.props.history.push({pathname:'/errorlist/'+user.anonymusId, state:{user}});
         }
     }
 
@@ -62,7 +62,7 @@ class UserList extends Component {
       const users = this.state.users;  
       const onItemClick = this.onItemClick;
       const usersItemArr = users.map((user)=>{
-          return <UserListItem {...user} key={user.anonymous_id} onItemClick={onItemClick(user)}/>      
+          return <UserListItem {...user} key={user.anonymusId} onItemClick={onItemClick(user)}/>      
       });
       return (
         <div>

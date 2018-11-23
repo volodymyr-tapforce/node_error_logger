@@ -9,14 +9,14 @@ const errorController = {
 
             if(user) { 
                 const errorDocParams = {
-                    anonymous_id: user.anonymous_id,
+                    anonymusId: user.anonymusId,
                     err_type: req.body.err_type,
                     err_message: req.body.err_message,
                 }
                 new errorModel(errorDocParams).save((errCreateErrDoc, errorDoc)=>{
                     if(errCreateErrDoc) return next(errCreateErrDoc)
                     else{
-                        return res.send({isNewUser, anonymous_id:user.anonymous_id});
+                        return res.send({isNewUser, anonymusId:user.anonymusId});
                     }
                 });
             }
@@ -24,7 +24,7 @@ const errorController = {
     },
     getErrorByAnonId:async (req, res, next)=>{
 
-        const errorsCount = await errorModel.count({anonymous_id:req.params.anonymous_id}, function(err, count){
+        const errorsCount = await errorModel.count({anonymusId:req.params.anonymusId}, function(err, count){
             return count;
         });
 
@@ -32,7 +32,7 @@ const errorController = {
         skip*=10;
         const limit = req.query.limit||10;
         
-        errorModel.find({anonymous_id:req.params.anonymous_id})
+        errorModel.find({anonymusId:req.params.anonymusId})
         .sort({created_at:-1})
         .skip(skip)
         .limit(limit)

@@ -6,7 +6,7 @@ if (process.env.DATABASE_URL) {
     dialect: 'postgres',
   });
 } else {
-  sequelize = new Sequelize('test', 'postgres', 'webdev`8', {
+  sequelize = new Sequelize('apollo', 'postgres', 'webdev`8', {
     host: 'localhost',
     dialect: 'postgres',
     operatorsAliases: false,

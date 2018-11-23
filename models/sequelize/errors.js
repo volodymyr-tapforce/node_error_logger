@@ -3,7 +3,7 @@ const error = (sequelize, DataTypes) => {
 
     const Error = sequelize.define('error', {
 
-        anonymous_id: {
+        anonymusId: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -23,7 +23,7 @@ const error = (sequelize, DataTypes) => {
     });
 
     Error.associate = models => {
-        Error.belongsTo(models.User,{ foreignKey: 'anonymous_id', targetKey: 'anonymous_id' });
+        Error.belongsTo(models.User,{ foreignKey: 'anonymusId', targetKey: 'anonymusId' });
     };
 
     // Error.beforeCreate(async user => {

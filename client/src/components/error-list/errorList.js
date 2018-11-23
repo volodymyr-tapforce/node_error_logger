@@ -20,7 +20,7 @@ class ErrorList extends Component {
 
         this.user = this.props.history.location.state.user;
     
-        const anonId = this.props.match.params.anonymous_id;
+        const anonId = this.props.match.params.anonymusId;
 
         const updateErroList = (matchId) => {
             if(matchId===anonId)
@@ -44,7 +44,7 @@ class ErrorList extends Component {
     onPageChange = async (e,{activePage}) =>{
      
         await this.setState({page:activePage});
-        const anonId = this.props.match.params.anonymous_id;
+        const anonId = this.props.match.params.anonymusId;
         serverApiCallService.fetchErrorList(anonId,this.state.page,(errorList)=>{
             this.setState({
                 errors: errorList.errorDocs, errorsDocCount: errorList.errorsCount
@@ -65,7 +65,7 @@ class ErrorList extends Component {
            <Link to="/userlist">Userlist</Link>
            <div className="list-item" >
                     <div><Image avatar src='/images/user.png'/></div>
-                    <div><b>anonymous_id:</b>{this.user.anonymous_id}</div>
+                    <div><b>anonymusId:</b>{this.user.anonymusId}</div>
                     <div><b>user_id:</b>{this.user.user_id}</div>
                     <div><b>email:</b>{this.user.email}</div>
             </div>

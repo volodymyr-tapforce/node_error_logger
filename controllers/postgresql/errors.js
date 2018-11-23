@@ -8,20 +8,20 @@ const errorController = {
             // if empy return null
             if(user) {
                 const errorDocParams = {
-                    anonymous_id: user.anonymous_id,
+                    anonymusId: user.anonymusId,
                     err_type: req.body.err_type,
                     err_message: req.body.err_message,
                 }
 
                 const newError = await errorModel.create(errorDocParams);
-                return res.send({isNewUser:true, anonymous_id:user.anonymous_id});
+                return res.send({isNewUser:true, anonymusId:user.anonymusId});
             } else{
                 return next(new Error('error create problem'));
             }
         });
     },
     getErrorByAnonId:async (req, res, next)=>{
-        const where = {anonymous_id:req.params.anonymous_id};
+        const where = {anonymusId:req.params.anonymusId};
         const errorsCount = await errorModel.count({where}); 
 
         let offset = (req.query.page - 1) || 0;
