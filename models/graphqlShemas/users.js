@@ -3,10 +3,11 @@ import { gql } from 'apollo-server-express';
 export default gql`
 
   type User {
-    anonymusId: ID!
-    err_type: String!
-    err_message: User!
-    createdAt: Date!
+    anonymusId: String!
+    user_id: String!
+    email: String!
+    created_at: Date!
+    lastErrorTime: Date!
   }
 
 `;

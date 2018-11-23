@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
 
   type Error {
-    anonymusId: ID!
+    anonymusId: String!
     err_type: String!
     err_message: String!
     createdAt: Date!
