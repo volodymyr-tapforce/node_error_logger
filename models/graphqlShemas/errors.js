@@ -5,7 +5,7 @@ export default gql`
   type Error {
     anonymusId: ID!
     err_type: String!
-    err_message: User!
+    err_message: String!
     createdAt: Date!
   }
 
