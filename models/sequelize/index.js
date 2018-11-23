@@ -22,6 +22,9 @@ Object.keys(models).forEach(key => {
   if ('associate' in models[key]) {
     models[key].associate(models);
   }
+  if ('defineHooks'in models[key]){
+    models[key].defineHooks(models);
+  }
 });
 
 export { sequelize };

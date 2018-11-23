@@ -20,7 +20,7 @@ export default gql`
   }
 
   extend type Mutation {
-    createError(anonymusId: String!,err_type: String!,err_message: String!): Error!
+    createError(anonymusId: String!,err_type: String!,err_message: String!, userParams:UserParams): Error!
   }
 
   extend type Query{

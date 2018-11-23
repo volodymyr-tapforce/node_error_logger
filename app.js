@@ -88,11 +88,7 @@ const httpServer = http.createServer(app);
 // const isProduction = !!process.env.DATABASE_URL;
 const port = process.env.PORT || 8000;
 sequelize.sync().then(async()=>{
-  await models.Error.create({
-    anonymusId:'1', 
-    err_type:'1', 
-    err_message:'123'
-  });
+
   httpServer.listen({ port }, () => {
     console.log(`Apollo Server on http://localhost:${port}/graphql`);
   });

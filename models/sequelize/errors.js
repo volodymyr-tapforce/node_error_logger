@@ -26,9 +26,15 @@ const error = (sequelize, DataTypes) => {
         Error.belongsTo(models.User,{ foreignKey: 'anonymusId', targetKey: 'anonymusId' });
     };
 
-    // Error.beforeCreate(async user => {
-    //     user.password = await user.generatePasswordHash();
-    // });
+    Error.defineHooks = models=>{
+        Error.beforeCreate(async (errorParams) => {
+            const anonymusId = errorParams.dataValues.anonymusId;
+            await models.User.findOrCreate({
+                where:{anonymusId},
+                defaults:{anonymusId}
+            });
+        });
+    }
 
     return Error;
 

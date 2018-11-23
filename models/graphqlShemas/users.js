@@ -10,4 +10,8 @@ export default gql`
     lastErrorTime: Date!
   }
 
+  input UserParams{
+    user_id: String
+    email: String
+  }
 `;

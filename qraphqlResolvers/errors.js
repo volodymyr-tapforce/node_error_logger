@@ -39,11 +39,14 @@ export default {
         }
     },
     Mutation:{
-        createError:  async (parent, { anonymusId, err_type, err_message }) => {
+        createError:  async (parent, { anonymusId, err_type, err_message, userParams }) => {
+            userParams = userParams||{test:"11"}
             const error = await models.Error.create({
                 anonymusId, 
                 err_type, 
-                err_message
+                err_message,
+            },{
+                userParams
             });
 
             return error;
