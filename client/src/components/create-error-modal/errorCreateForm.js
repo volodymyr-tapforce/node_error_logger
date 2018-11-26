@@ -34,17 +34,19 @@ class ErrorForm extends Component {
             err_message:this.state.err_message
         }
 
-        serverApiCallService.createErrorDoc(reqBody, (response)=>{
-            if (response.status === 200) {
-                this.setState({
-                    anonymusId: '',
-                    err_type: '',
-                    err_message: '',
-                    email: '',
-                    user_id: ''
-                })
-            }
-        });
+        console.log(this.props);
+
+        // serverApiCallService.createErrorDoc(reqBody, (response)=>{
+        //     if (response.status === 200) {
+        //         this.setState({
+        //             anonymusId: '',
+        //             err_type: '',
+        //             err_message: '',
+        //             email: '',
+        //             user_id: ''
+        //         })
+        //     }
+        // });
     }
 
     render() {

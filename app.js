@@ -93,12 +93,4 @@ sequelize.sync().then(async()=>{
     console.log(`Apollo Server on http://localhost:${port}/graphql`);
   });
 });
-// sequelize.sync({ force: isTest || isProduction }).then(async () => {
-//   if (isTest || isProduction) {
-//     createUsersWithMessages(new Date());
-//   }
 
-//   httpServer.listen({ port }, () => {
-//     console.log(`Apollo Server on http://localhost:${port}/graphql`);
-//   });
-// });

@@ -17,10 +17,11 @@ const serverApiCallService = {
     },
     // FETCH GET API
     fetchUserList:async (searchParams,responceCallback)=> {
-        const responce = await axios.get('/api/users',{
-            params:searchParams
-        });
-        responceCallback(responce.data);
+        // const responce = await axios.get('/api/users',{
+        //     params:searchParams
+        // });
+        // responceCallback(responce.data);
+        responceCallback([]);
     },
 
     fetchErrorList:async(anonymusId, page, responceCallback)=>{
@@ -34,14 +35,15 @@ const serverApiCallService = {
     // POST API
     createErrorDoc:async (reqBody, responceCallback)=>{
 
-        const responce = await axios.post('/api/errors', reqBody);
-        responceCallback(responce);
+        // const responce = await axios.post('/api/errors', reqBody);
+        // responceCallback(responce);
 
-        if(responce.data.isNewUser){
-            EventEmitter.publish('newuser');
-        }
+        // if(responce.data.isNewUser){
+        //     EventEmitter.publish('newuser');
+        // }
 
-        EventEmitter.publish('newerror',responce.data.anonymusId);
+        // EventEmitter.publish('newerror',responce.data.anonymusId);
+        responceCallback({});
 
     }
 
