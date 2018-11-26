@@ -7,7 +7,7 @@ const fromCursorHash = string =>
 
 export default {
     Query:{
-        errors:async (parent, { cursor, limit = 100, anonymusId }) => {
+        users:async (parent, { cursor, limit = 100, anonymusId }) => {
             console.log(cursor);
             const cursorOptions = cursor
               ? {
@@ -20,14 +20,14 @@ export default {
                 }
               : {where:{anonymusId}};
       
-            const errors = await models.Error.findAll({
+            const users = await models.User.findAll({
               order: [['createdAt', 'DESC']],
               limit: limit + 1,
               ...cursorOptions,
             });
       
-            const hasNextPage = errors.length > limit;
-            const edges = hasNextPage ? errors.slice(0, -1) : errors;
+            const hasNextPage = users.length > limit;
+            const edges = hasNextPage ? users.slice(0, -1) : users;
       
             return {
               edges,
@@ -39,20 +39,5 @@ export default {
               },
             };
         }
-    },
-    Mutation:{
-        createError:  async (parent, { anonymusId, err_type, err_message, userParams }) => {
-            
-            const params = userParams||{};
-            const error = await models.Error.create({
-                anonymusId, 
-                err_type, 
-                err_message,
-            },{
-                userParams:params
-            });
-
-            return error;
-          }
     }
 }

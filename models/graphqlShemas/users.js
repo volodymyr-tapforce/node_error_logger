@@ -14,4 +14,13 @@ export default gql`
     user_id: String
     email: String
   }
+
+  type UserConnection {
+    edges: [User!]!
+    pageInfo: PageInfo!
+  }
+
+  extend type Query{
+    users (cursor: String, limit: Int, anonymusId:String): UserConnection!
+  }
 `;
