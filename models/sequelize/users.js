@@ -8,10 +8,12 @@ const user = (sequelize, DataTypes) => {
                 unique: true
             },
             user_id: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue:''
             },
             email: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue:''
             },
             created_at: {
                 type: DataTypes.DATE,

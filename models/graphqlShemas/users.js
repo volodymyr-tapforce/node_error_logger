@@ -21,6 +21,6 @@ export default gql`
   }
 
   extend type Query{
-    users (cursor: String, limit: Int, anonymusId:String): UserConnection!
+    users (cursor: String, limit: Int, user_id:String, email:String): UserConnection!
   }
 `;

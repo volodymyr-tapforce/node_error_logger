@@ -8,7 +8,6 @@ const fromCursorHash = string =>
 export default {
     Query:{
         errors:async (parent, { cursor, limit = 100, anonymusId }) => {
-            console.log(cursor);
             const cursorOptions = cursor
               ? {
                   where: {
