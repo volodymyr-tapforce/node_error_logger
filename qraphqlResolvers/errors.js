@@ -7,16 +7,17 @@ const fromCursorHash = string =>
 
 export default {
     Query:{
-        errors:async (parent, { cursor, limit = 100 }) => {
+        errors:async (parent, { cursor, limit = 100, anonymusId }) => {
             const cursorOptions = cursor
               ? {
                   where: {
                     createdAt: {
                       [Sequelize.Op.lt]: fromCursorHash(cursor),
                     },
+                    anonymusId:anonymusId
                   },
                 }
-              : {};
+              : {where:{anonymusId}};
       
             const errors = await models.Error.findAll({
               order: [['createdAt', 'DESC']],

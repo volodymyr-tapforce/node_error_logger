@@ -24,6 +24,6 @@ export default gql`
   }
 
   extend type Query{
-    errors (cursor: String, limit: Int): ErrorConnection!
+    errors (cursor: String, limit: Int, anonymusId:String): ErrorConnection!
   }
 `;
