@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import { withApollo } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import ErrorFormInput from './errorFormInput';
 import serverApiCallService from '../../api_services/serverApiCallService';
-import { withApollo } from 'react-apollo';
 
 
 class ErrorForm extends Component {
@@ -36,6 +38,23 @@ class ErrorForm extends Component {
         }
 
         console.log(this.props);
+        const client = this.props.client;
+
+        client.query({
+            query: gql`
+            {
+                users{
+                    edges {
+                      anonymusId
+                    }
+                    pageInfo { 
+                      hasNextPage,
+                      endCursor
+                    }
+                }
+              }
+            `
+          }).then(response => console.log(response.data))
 
         // serverApiCallService.createErrorDoc(reqBody, (response)=>{
         //     if (response.status === 200) {
