@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import ErrorFormInput from './errorFormInput';
 import serverApiCallService from '../../api_services/serverApiCallService';
+import { withApollo } from 'react-apollo';
 
 
 class ErrorForm extends Component {
@@ -69,4 +70,4 @@ class ErrorForm extends Component {
     }
   }
   
-  export default ErrorForm;
+  export default withApollo(ErrorForm);
